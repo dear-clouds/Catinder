@@ -1,11 +1,9 @@
 
 td-cards {
   display: block;
-  z-index: 999999;
 }
 
 td-card {
-  z-index: 999999;
   position: absolute;
   left: 50%;
   margin-top: 80px;
@@ -20,6 +18,7 @@ td-card {
 
 td-card .image {
   position: relative;
+  border: 3px solid white;
 }
 
 td-card img {

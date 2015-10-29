@@ -9,13 +9,13 @@
   <img ng-src="{{card.image}}">
   <div class="yes-text">LIKE</div>
 </div>
-<div class="col"><p style="text-align:center;"><h3>{{card.nom}}Lala</h2></p></div>
+<div class="col" style="display:block;text-align:center; background: white;"><h3>{{card.nom}}</h2></div>
 </td-card>
 
 
-<div class="row" style="position: relative; margin-top: 10px; z-index: 2;" class="card-{{$index}}">
+<div class="row" style="position: relative; margin-top: 10px;" class="card-{{$index}}">
 
-  <div class="col-50" style="text-align:center;"><a class="button ion-close-round" style="padding: 5px; border-radius: 50px; border: 1px solid red;" ng-click="cardSwipedLeft($index); cardDestroyed($index)"></a></div>
+  <div class="col-50" style="text-align:center;"><a class="button ion-close-round" style="padding: 5px; border-radius: 50px; border: 1px solid red;" ng-click="cardDestroyed($index); cardSwipedLeft($index)"></a></div>
   <div class="col-50" style="text-align:center;"><a class="button ion-heart" ng-click="cardDestroyed($index); cardSwipedRight($index)" style="padding: 5px; border-radius: 50px; border: 1px solid green;"></a></div>
 
 </div>

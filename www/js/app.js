@@ -32,20 +32,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.blacklist', {
+    url: '/blacklist',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/blacklist.html'
       }
     }
   })
 
-  .state('app.browse', {
-      url: '/browse',
+  .state('app.favoris', {
+      url: '/favoris',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          templateUrl: 'templates/favoris.html'
         }
       }
     })
