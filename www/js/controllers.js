@@ -13,9 +13,23 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   
 })
 
-.controller('CardsCtrl', function($scope, $http, TDCardDelegate) {
+.controller('CardsCtrl', function($scope, $http, TDCardDelegate, $timeout) {
   console.log('CARDS CTRL');
   var cardTypes = [];
+
+  var sortCards = function() {
+    console.log('SORTCARDS');
+    existingCards = document.body.querySelectorAll('td-card');
+
+    for(i = 0; i < existingCards.length; i++) {
+      card = existingCards[i];
+      if(!card) continue;
+      if(i > 0) {
+        card.style.transform = card.style.webkitTransform = '';
+      }
+      card.style.zIndex = (existingCards.length - i);
+    }
+  };
 
   $http({
       method: 'GET',
@@ -24,6 +38,10 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
       console.log('success', response.data.cats);
 
       Array.prototype.push.apply(cardTypes, response.data.cats);
+      $timeout(function() {
+          sortCards();
+        });
+      
 
       console.log('cards : ', cardTypes)
     }, function errorCallback(response) {
@@ -46,6 +64,9 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
       console.log('success', response.data.cats);
 
       Array.prototype.push.apply($scope.cards, response.data.cats);
+      $timeout(function() {
+          sortCards();
+        });
 
       console.log('cards : ', $scope.cards)
     }, function errorCallback(response) {
