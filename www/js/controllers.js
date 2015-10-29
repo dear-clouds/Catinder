@@ -13,15 +13,22 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   
 })
 
-.controller('CardsCtrl', function($scope, TDCardDelegate) {
+.controller('CardsCtrl', function($scope, $http, TDCardDelegate) {
   console.log('CARDS CTRL');
-  var cardTypes = [
-    { image: 'http://lorempixel.com/300/300/cats/1/' },
-    { image: 'http://lorempixel.com/300/300/cats/2/' },
-    { image: 'http://lorempixel.com/300/300/cats/3/' },
-    { image: 'http://lorempixel.com/300/300/cats/4/' },
-    { image: 'http://lorempixel.com/300/300/cats/5/' }
-  ];
+  var cardTypes = [];
+
+  $http({
+      method: 'GET',
+      url: '/js/cats.json'
+    }).then(function successCallback(response) {
+      console.log('success', response.data.cats);
+
+      Array.prototype.push.apply(cardTypes, response.data.cats);
+
+      console.log('cards : ', cardTypes)
+    }, function errorCallback(response) {
+      console.log('error', response);
+    });
 
   $scope.cards = cardTypes;
   console.log($scope.cards);
@@ -31,9 +38,23 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   };
 
   $scope.addCard = function() {
-    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-    newCard.id = Math.random();
-    $scope.cards.push(angular.extend({}, newCard));
+
+    $http({
+      method: 'GET',
+      url: '/js/cats.json'
+    }).then(function successCallback(response) {
+      console.log('success', response.data.cats);
+
+      Array.prototype.push.apply($scope.cards, response.data.cats);
+
+      console.log('cards : ', $scope.cards)
+    }, function errorCallback(response) {
+      console.log('error', response);
+    });
+
+    // var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+    // newCard.id = Math.random();
+    // $scope.cards.push(angular.extend({}, newCard));
   }
 
   $scope.cardSwipedLeft = function(index) {

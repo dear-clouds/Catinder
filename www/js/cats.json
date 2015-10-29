@@ -1,7 +1,7 @@
-[
-    { image: 'http://lorempixel.com/300/300/cats/1/' },
-    { image: 'http://lorempixel.com/300/300/cats/2/' },
-    { image: 'http://lorempixel.com/300/300/cats/3/' },
-    { image: 'http://lorempixel.com/300/300/cats/4/' },
-    { image: 'http://lorempixel.com/300/300/cats/5/' }
-]
+{
+    "cats" :   [{"id" : 1, "nom" : "Chatounet", "image": "http://lorempixel.com/300/300/cats/1/" },
+			    { "id" : 2, "nom" : "cat", "image": "http://lorempixel.com/300/300/cats/2/" },
+			    { "id" : 3, "nom" : "Bibi", "image": "http://lorempixel.com/300/300/cats/3/" },
+			    { "id" : 4, "nom" : "Boubou", "image": "http://lorempixel.com/300/300/cats/4/" },
+			    { "id" : 5, "nom" : "Rex", "image": "http://lorempixel.com/300/300/cats/5/" }]
+}
