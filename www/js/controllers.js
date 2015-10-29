@@ -13,9 +13,19 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   
 })
 
-.controller('CardsCtrl', function($scope, $http, TDCardDelegate, $timeout) {
+.controller('CardsCtrl', function($scope, $http, TDCardDelegate, $timeout, $localstorage) {
   console.log('CARDS CTRL');
   var cardTypes = [];
+
+  console.log('localstorage content', $localstorage.getObject('cats'));
+
+  if (!$localstorage.getObject('cats').favorite) {
+    console.log('no localstorage yet');
+    $localstorage.setObject('cats', {
+      favorite: [],
+      blacklist: []
+    });
+  }
 
   var sortCards = function() {
     console.log('SORTCARDS');
@@ -49,11 +59,12 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
     });
 
   $scope.cards = cardTypes;
-  console.log($scope.cards);
+  console.log('scope.cards', $scope.cards);
 
-  $scope.cardDestroyed = function(index) {
-    $scope.cards.splice(index, 1);
-  };
+  // $scope.cardDestroyed = function(index) {
+  //   console.log('index cardDestroyed', index);
+  //   localCard = $scope.cards.splice(index, 1);
+  // };
 
   $scope.addCard = function() {
 
@@ -79,8 +90,20 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   }
 
   $scope.cardSwipedLeft = function(index) {
-    console.log('LEFT SWIPE');
-    console.log($scope.cards);
+    console.log('index', index);
+    console.log('LEFT SWIPE $scope.cards', $scope.cards);
+    console.log('LEFT SWIPE $scope.card', $scope.card);
+    console.log('LEFT SWIPE $scope.cards[index]', $scope.cards[index]);
+
+    var localCard = $scope.cards.splice(index, 1);
+
+    console.log('LEFT SWIPE localCard', localCard);
+    var catObject = $localstorage.getObject('cats');
+    catObject.blacklist.push(localCard);
+
+    $localstorage.setObject('cats', catObject);
+
+
     if (cardTypes.length < 3)
       $scope.addCard();
   };

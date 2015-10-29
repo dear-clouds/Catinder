@@ -3,7 +3,7 @@
 
 
 <td-cards>
-<td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index); sortCards()" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" class="card-{{$index}}">
+<td-card ng-repeat="card in cards"  on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" class="card-{{$index}}">
 <div class="image">
   <div class="no-text">NOPE</div>
   <img ng-src="{{card.image}}">
@@ -13,10 +13,11 @@
 </td-card>
 
 
-<div class="row" style="position: relative; margin-top: 10px;" class="card-{{$index}}">
+<div class="row" style="position: absolute; margin-top: 370px;" class="card-{{$index}}">
 
-  <div class="col-50" style="text-align:center;"><a class="button ion-close-round" style="padding: 5px; border-radius: 50px; border: 1px solid red; font-size: 150%;" ng-click="cardDestroyed($index); cardSwipedLeft($index)"></a></div>
-  <div class="col-50" style="text-align:center;"><a class="button ion-heart" ng-click="cardDestroyed($index); cardSwipedRight($index)" style="padding: 5px; border-radius: 50px; border: 1px solid green; font-size: 150%;"></a></div>
+
+  <div class="col-50" style="text-align:center;"><a class="button ion-close-round" style="padding: 5px; border-radius: 50px; border: 1px solid red; font-size: 150%;" ng-click="cardSwipedLeft($index)"></a></div>
+  <div class="col-50" style="text-align:center;"><a class="button ion-heart" ng-click="cardSwipedRight($index)" style="padding: 5px; border-radius: 50px; border: 1px solid green; font-size: 150%;"></a></div>
 
 </div>
 
