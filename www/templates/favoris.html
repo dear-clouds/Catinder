@@ -1,5 +1,11 @@
 <ion-view view-title="Favoris">
+
 <ion-content>
+
+<ion-header-bar class="bar-positive">
+<button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">Réinitialiser</button>
+</ion-header-bar>
+
 
 <ion-list ng-controller="CardsCtrl"
 show-delete="shouldShowDelete"
@@ -8,7 +14,7 @@ can-swipe="listCanSwipe">
 <ion-item ng-repeat="item in items"
 class="item-thumbnail-left">
 
-<img ng-src="{{item.img}}">
+<img ng-src="{{item.image}}">
 <h2>{{item.nom}}</h2>
 <ion-option-button class="button-info"
 ng-click="edit(item)">
