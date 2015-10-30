@@ -6,7 +6,7 @@ td-cards {
 td-card {
   position: absolute;
   left: 50%;
-  margin-top: 80px;
+  margin-top: 20px;
   margin-bottom: 40px;
   margin-left: -150px;
   width: 300px;
