@@ -72,23 +72,23 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   };
 
   $http({
-      method: 'GET',
-      url: 'js/cats.json'
-    }).then(function successCallback(response) {
-      console.log('success', response.data.cats);
-      var temp = profilCheck(response.data.cats);
-      console.log('success after profilCheck', temp);
+    method: 'GET',
+    url: 'js/cats.json'
+  }).then(function successCallback(response) {
+    console.log('success', response.data.cats);
+    var temp = profilCheck(response.data.cats);
+    console.log('success after profilCheck', temp);
 
-      Array.prototype.push.apply(cardTypes, temp);
-      $timeout(function() {
-          sortCards();
-        });
-      
-
-      console.log('cards : ', cardTypes)
-    }, function errorCallback(response) {
-      console.log('error', response);
+    Array.prototype.push.apply(cardTypes, temp);
+    $timeout(function() {
+      sortCards();
     });
+
+
+    console.log('cards : ', cardTypes)
+  }, function errorCallback(response) {
+    console.log('error', response);
+  });
 
   $scope.cards = cardTypes;
   console.log('scope.cards', $scope.cards);
@@ -109,8 +109,8 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
       Array.prototype.push.apply($scope.cards, temp);
       $timeout(function() {
-          sortCards();
-        });
+        sortCards();
+      });
 
       console.log('cards : ', $scope.cards)
     }, function errorCallback(response) {
@@ -184,6 +184,27 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
     catObject.favorite.splice(index,1);
 
     $localstorage.setObject('cats', catObject);
+  };
+
+  $scope.delBlacklist = function(index) {
+    var catObject = $localstorage.getObject('cats');
+    catObject.blacklist.splice(index,1);
+
+    $localstorage.setObject('cats', catObject);
+  };
+
+  $scope.ReinitFav = function(index) {
+    var catObject = $localstorage.getObject('cats');
+    catObject.favorite.splice(index, catObject.favorite.length);
+    $localstorage.setObject('cats', catObject);
+    window.location.reload();
+  };
+
+  $scope.ReinitBlacklist = function(index) {
+    var catObject = $localstorage.getObject('cats');
+    catObject.blacklist.splice(index, catObject.blacklist.length);
+    $localstorage.setObject('cats', catObject);
+    window.location.reload();
   };
 
 });
