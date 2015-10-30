@@ -27,6 +27,36 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
     });
   }
 
+  var profilCheck = function(newCats) {
+
+    var fav = $localstorage.getObject('cats').favorite;
+    var blk = $localstorage.getObject('cats').blacklist;
+
+    Array.prototype.push.apply(fav, blk);
+
+    console.log('fav',fav);
+    console.log('newCats.length',newCats.length);
+    
+    var i;
+    var j;
+
+    for(i = 0; i < newCats.length; i++) {
+
+      for (j = 0; j < fav.length; j++) {
+
+        console.log('newCats[i].id', newCats[i].id);
+        console.log('fav[j].id', fav[j].id);
+
+        if (newCats[i].id === fav[j].id) {
+          newCats.splice(i,1);
+        }
+      }
+
+    }
+    console.log('newCats', newCats);
+    return newCats;
+  };
+
   var sortCards = function() {
     console.log('SORTCARDS');
     existingCards = document.body.querySelectorAll('td-card');
@@ -43,11 +73,13 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
   $http({
       method: 'GET',
-      url: '/js/cats.json'
+      url: 'js/cats.json'
     }).then(function successCallback(response) {
       console.log('success', response.data.cats);
+      var temp = profilCheck(response.data.cats);
+      console.log('success after profilCheck', temp);
 
-      Array.prototype.push.apply(cardTypes, response.data.cats);
+      Array.prototype.push.apply(cardTypes, temp);
       $timeout(function() {
           sortCards();
         });
@@ -70,11 +102,12 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
     $http({
       method: 'GET',
-      url: '/js/cats.json'
+      url: 'js/cats.json'
     }).then(function successCallback(response) {
       console.log('success', response.data.cats);
+      var temp = profilCheck(response.data.cats);
 
-      Array.prototype.push.apply($scope.cards, response.data.cats);
+      Array.prototype.push.apply($scope.cards, temp);
       $timeout(function() {
           sortCards();
         });
@@ -145,5 +178,12 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
   console.log('$scope.itemsBlk', $scope.itemsBlk);
   console.log('$scope.itemsFav', $scope.itemsFav);
+
+  $scope.delFav = function(index) {
+    var catObject = $localstorage.getObject('cats');
+    catObject.favorite.splice(index,1);
+
+    $localstorage.setObject('cats', catObject);
+  };
 
 });
