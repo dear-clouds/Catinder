@@ -73,10 +73,10 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
   $http({
       method: 'GET',
-      url: 'js/cats.json'
+      url: 'http://localhost:1337/cats/'
     }).then(function successCallback(response) {
-      console.log('success', response.data.cats);
-      var temp = profilCheck(response.data.cats);
+      console.log('success', response.data);
+      var temp = profilCheck(response.data);
       console.log('success after profilCheck', temp);
 
       Array.prototype.push.apply(cardTypes, temp);
@@ -102,10 +102,10 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
     $http({
       method: 'GET',
-      url: 'js/cats.json'
+      url: 'http://localhost:1337/cats/'
     }).then(function successCallback(response) {
-      console.log('success', response.data.cats);
-      var temp = profilCheck(response.data.cats);
+      console.log('success', response.data);
+      var temp = profilCheck(response.data);
 
       Array.prototype.push.apply($scope.cards, temp);
       $timeout(function() {
