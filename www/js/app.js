@@ -36,7 +36,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
     url: '/blacklist',
     views: {
       'menuContent': {
-        templateUrl: 'templates/blacklist.html'
+        templateUrl: 'templates/blacklist.html',
+        controller: 'FavCtrl'
       }
     }
   })
@@ -45,7 +46,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
       url: '/favoris',
       views: {
         'menuContent': {
-          templateUrl: 'templates/favoris.html'
+          templateUrl: 'templates/favoris.html',
+          controller: 'FavCtrl'
         }
       }
     })
@@ -53,7 +55,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
       url: '/cats',
       views: {
         'menuContent': {
-          templateUrl: 'templates/cats.html'
+          templateUrl: 'templates/cats.html',
         }
       }
     })

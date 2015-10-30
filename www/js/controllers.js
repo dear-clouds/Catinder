@@ -99,7 +99,7 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
 
     console.log('LEFT SWIPE localCard', localCard);
     var catObject = $localstorage.getObject('cats');
-    catObject.blacklist.push(localCard);
+    catObject.blacklist.push(localCard[0]);
 
     $localstorage.setObject('cats', catObject);
 
@@ -111,11 +111,39 @@ angular.module('starter.controllers', ['ionic.contrib.ui.tinderCards'])
   $scope.cardSwipedRight = function(index) {
     console.log('RIGHT SWIPE');
     console.log($scope.cards);
+
+    var localCard = $scope.cards.splice(index, 1);
+
+    console.log('RIGHT SWIPE localCard', localCard);
+    var catObject = $localstorage.getObject('cats');
+    catObject.favorite.push(localCard[0]);
+
+    $localstorage.setObject('cats', catObject);
+
     if (cardTypes.length < 3)
       $scope.addCard();
   };
 })
 
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('FavCtrl', function($scope, $stateParams, $localstorage) {
+
+  $scope.shouldShowDelete = false;
+  $scope.shouldShowReorder = false;
+  $scope.listCanSwipe = true;
+
+  if (!$localstorage.getObject('cats').favorite) {
+    console.log('no localstorage yet');
+    $localstorage.setObject('cats', {
+      favorite: [],
+      blacklist: []
+    });
+  }
+
+  $scope.itemsBlk = $localstorage.getObject('cats').blacklist;
+  $scope.itemsFav = $localstorage.getObject('cats').favorite;
+
+  console.log('$scope.itemsBlk', $scope.itemsBlk);
+  console.log('$scope.itemsFav', $scope.itemsFav);
+
 });
