@@ -34,6 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
 
   .state('app.blacklist', {
     url: '/blacklist',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/blacklist.html',
@@ -44,6 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tin
 
   .state('app.favoris', {
       url: '/favoris',
+      cache: false,
       views: {
         'menuContent': {
           templateUrl: 'templates/favoris.html',
