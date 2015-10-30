@@ -1,28 +1,30 @@
 <ion-view view-title="Favoris">
-<ion-content>
 
-<ion-list ng-controller="CardsCtrl"
-show-delete="shouldShowDelete"
-show-reorder="shouldShowReorder"
-can-swipe="listCanSwipe">
-<ion-item ng-repeat="item in items"
-class="item-thumbnail-left">
+	<ion-content>
 
-<img ng-src="{{item.img}}">
-<h2>{{item.nom}}</h2>
-<ion-option-button class="button-info"
-ng-click="edit(item)">
-Edit
-</ion-option-button>
-<ion-delete-button class="ion-minus-circled"
-ng-click="items.splice($index, 1)">
-</ion-delete-button>
-<ion-reorder-button class="ion-navicon"
-on-reorder="reorderItem(item, $fromIndex, $toIndex)">
-</ion-reorder-button>
+		<ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
+			<ion-item ng-repeat="item in itemsFav" class="item-thumbnail-left">
 
-</ion-item>
-</ion-list>
+				<img ng-src="{{item.image}}">
 
-</ion-content>
+				<h2>{{item.nom}}</h2>
+				
+				<ion-option-button class="button-info" ng-click="itemsFav.splice($index, 1); delFav($index)" style="background: #CC0000; color: white;">
+					Del
+				</ion-option-button>
+
+				<ion-option-button class="button-positive" ng-click="fav(item)">
+                    Block
+                </ion-option-button>
+				
+				<ion-delete-button class="ion-minus-circled" ng-click="itemsFav.splice($index, 1)"></ion-delete-button>
+				<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+
+			</ion-item>
+		</ion-list>
+
+	</ion-content>
+	<div class="bar bar-footer bar-positive">
+  <div class="title"><a class="button button-positive" style="display:block;border:none;" ng-click="itemsFav.splice($index, catObject.favorite.length); ReinitFav($index)">Réinitialiser</a></div>
+</div>
 </ion-view>
